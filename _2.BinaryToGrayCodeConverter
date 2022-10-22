@@ -1,0 +1,35 @@
+BINARY TO GRAY CODE CONVERTER
+//design_binaryToGray
+module bintogray(b2,b1,b0,g2,g1,g0);
+input b2,b1,b0;
+output g2,g1,g0;
+assign g2 = b2;
+assign g1 = b2^b1;
+assign g0 = b1^b0;
+endmodule
+//testbench_binaryToGray
+module bintogray_tb;
+wire g2,g1,g0;
+reg b2,b1,b0;
+bintogray m1(.g2(g2),.g1(g1),.g0(g0),.b2(b2),.b1(b1),.b0(b0));
+initial begin
+$monitor("\t%b\t%b\t%b\t%b\t%b\t%b",g2,g1,g0,b2,b1,b0);
+$dumpfile("test.vcd");
+$dumpvars();
+{b2,b1,b0} = 3'b000;
+#2
+{b2,b1,b0} = 3'b001;
+#2
+{b2,b1,b0} = 3'b010;
+#2
+{b2,b1,b0} = 3'b011;
+#2
+{b2,b1,b0} = 3'b100;
+#2
+{b2,b1,b0} = 3'b101;
+#2
+{b2,b1,b0} = 3'b110;
+#2
+{b2,b1,b0} = 3'b111;
+end
+endmodule
