@@ -1,0 +1,32 @@
+//design_HA_behaviour
+module HA(a,b,sum,carry);
+input a,b;
+output reg sum,carry;
+always@(a,b)
+begin
+sum=a^b;
+carry=a&b;
+end
+endmodule
+//testbench_HA_behaviour
+module HA_tb;
+reg a1,b1;
+wire s1,c1;
+HA HA_tb(.a(a1), .b(b1), .sum(s1), .carry(c1));
+initial begin
+$dumpfile("dump.vcd");
+$dumpvars(1);
+a1 = 1'b0;
+b1 = 1'b0;
+#1 $display("a1:%b,b1:%b,s1:%b,c1:%b",a1,b1,s1,c1);
+a1 = 1'b0;
+b1 = 1'b1;
+#1 $display("a1:%b,b1:%b,s1:%b,c1:%b",a1,b1,s1,c1);
+a1 = 1'b1;
+b1 = 1'b0;
+#1 $display("a1:%b,b1:%b,s1:%b,c1:%b",a1,b1,s1,c1);
+a1 = 1'b1;
+b1 = 1'b1;
+#1 $display("a1:%b,b1:%b,s1:%b,c1:%b",a1,b1,s1,c1);
+end
+endmodule

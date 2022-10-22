@@ -1,0 +1,28 @@
+//design_DEMUX
+module demux1to4(i0,i1,i2,i3,s1,s0,d);
+output i0,i1,i2,i3;
+input s1,s0,d;
+assign i0 = ~s1&~s0&d;
+assign i1 = ~s1&s0&d;
+assign i2 = s1&~s0&d;
+assign i3 = s1&s0&d;
+endmodule
+//testbench_DEMUX
+module demux1to4_tb;
+wire i0,i1,i2,i3;
+reg s1,s0,d;
+demux1to4 m1(.d(d), .i0(i0), .i1(i1), .i2(i2), .i3(i3), .s0(s0), .s1(s1));
+initial begin
+$monitor("\t%b\t%b\t%b\t%b\t%b\t%b\t%b",s1,s0,i0,i1,i2,i3,d);
+$dumpfile("test.vcd");
+$dumpvars();
+d = 1'b1;
+{s1,s0} = 2'b00;
+#2
+{s1,s0} = 2'b01;
+#2
+{s1,s0} = 2'b10;
+#2
+{s1,s0} = 2'b11;
+end
+endmodule

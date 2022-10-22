@@ -1,0 +1,35 @@
+GRAY TO BINARY CODE CONVERTER
+// design_Gray to Binary
+module graytobin(g2,g1,g0,b2,b1,b0);
+output b2,b1,b0;
+input g2,g1,g0;
+assign b2=g2;
+assign b1=g2 ^ g1;
+assign b0=g2 ^g1 ^ g0;
+endmodule
+//testbench_Gray to Binary
+module graytobin_tb;
+wire b2,b1,b0;
+reg g2,g1,g0;
+graytobin m1(.b2(b2),.b1(b1),.b0(b0),.g2(g2),.g1(g1),.g0(g0));
+initial begin
+$monitor("\t%b\t%b\t%b\t%b\t%b\t%b",g2,g1,g0,b2,b1,b0);
+$dumpfile("test.vcd");
+$dumpvars();
+{g2,g1,g0}=3'b000;
+#2
+{g2,g1,g0}=3'b001;
+#2
+{g2,g1,g0}=3'b010;
+#2
+{g2,g1,g0}=3'b011;
+#2
+{g2,g1,g0}=3'b100;
+#2
+{g2,g1,g0}=3'b101;
+#2
+{g2,g1,g0}=3'b110;
+#2
+{g2,g1,g0}=3'b111;
+end
+endmodule

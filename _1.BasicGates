@@ -1,0 +1,34 @@
+BASIC GATES
+//design_basic gates
+module gate(a,b,AND,OR,NOT,XOR,XNOR);
+input a,b;
+output AND,OR,NOT,XOR,XNOR;
+assign AND=a &b;
+assign OR=a | b;
+assign NOT=~a;
+assign XOR=a^b;
+assign XNOR=~(a^b);
+endmodule
+//testbench_basic gates
+module gate_tb;
+reg a1,b1;
+wire y1,y2,y3,y4,y5;
+gate gate_tb(.a(a1),.b(b1),.AND(y1),.OR(y2),.NOT(y3), .XOR(y4),.XNOR(y5));
+initial begin
+// $monitor(a1,b1,y1);
+$dumpfile("dump.vcd");
+$dumpvars(1);
+a1=1'b0;
+b1=1'b0;
+#1 $display("a1:%b,b1:%b,y1:%b,y2:%b,y3:%b,y4:%b,y5:%b",a1,b1,y1,y2,y3,y4,y5);
+a1=1'b0;
+b1=1'b1;
+#1 $display("a1:%b,b1:%b,y1:%b,y2:%b,y3:%b,y4:%b,y5:%b",a1,b1,y1,y2,y3,y4,y5);
+a1=1'b1;
+b1=1'b0;
+#1 $display("a1:%b,b1:%b,y1:%b,y2:%b,y3:%b,y4:%b,y5:%b",a1,b1,y1,y2,y3,y4,y5);
+a1=1'b1;
+b1=1'b1;
+#1 $display("a1:%b,b1:%b,y1:%b,y2:%b,y3:%b,y4:%b,y5:%b",a1,b1,y1,y2,y3,y4,y5);
+end
+endmodule

@@ -1,0 +1,29 @@
+//design_MUX
+module mux4to1(y,i0,i1,i2,i3,s1,s0);
+output y;
+input i0,i1,i2,i3;
+input s1,s0;
+assign y = (~s1&~s0&i0)|(~s1&s0&i1)|(s1&~s0&i2)|(s1&s0&i3);
+endmodule
+//testbench_MUX
+module mux4to1_tb;
+wire y;
+reg s1,s0,i0,i1,i2,i3;
+mux4to1 m1(.y(y), .i0(i0), .i1(i1), .i2(i2), .i3(i3), .s0(s0), .s1(s1));
+initial begin
+$monitor("\t%b\t%b\t%b\t%b\t%b\t%b\t%b",s1,s0,i0,i1,i2,i3,y);
+$dumpfile("test.vcd");
+$dumpvars();
+i0 = 1'b1;
+i1 = 1'b1;
+i2 = 1'b1;
+i3 = 1'b1;
+{s1,s0} = 2'b00;
+#2
+{s1,s0} = 2'b01;
+#2
+{s1,s0} = 2'b10;
+#2
+{s1,s0} = 2'b11;
+end
+endmodule
