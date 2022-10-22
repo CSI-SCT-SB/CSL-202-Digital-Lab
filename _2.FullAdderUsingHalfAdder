@@ -1,0 +1,60 @@
+FULL ADDER USING HALF ADDER
+//design_FullAdder using HalfAdder
+module FA(a,b,cin,sum,cout);
+input a,b,cin;
+output sum,cout;
+wire sum1,carry1;
+wire sum2,carry2;
+HA ha1(a,b,sum1,carry1);
+HA ha2(sum1,cin,sum2,carry2);
+assign sum = sum2;
+assign cout = carry1|carry2;
+endmodule
+module HA(a,b,sum,carry);
+input a,b;
+output sum,carry;
+assign sum = a^b;
+assign carry = a&b;
+endmodule
+//testbench_FullAdder using HalfAdder
+module FA_tb;
+reg a1,b1,c1;
+wire y1,y2;
+FA FA_tb(.a(a1), .b(b1), .cin(c1), .sum(y1), .cout(y2));
+initial begin
+$dumpfile("dump.vcd");
+$dumpvars(1);
+a1 = 1'b0;
+b1 = 1'b0;
+c1 = 1'b0;
+#1 $display("a1:%b,b1:%b,c1:%b,y1:%b,y2:%b,",a1,b1,c1,y1,y2);
+a1 = 1'b0;
+b1 = 1'b0;
+c1 = 1'b1;
+#1 $display("a1:%b,b1:%b,c1:%b,y1:%b,y2:%b,",a1,b1,c1,y1,y2);
+a1 = 1'b0;
+b1 = 1'b1;
+c1 = 1'b0;
+#1 $display("a1:%b,b1:%b,c1:%b,y1:%b,y2:%b,",a1,b1,c1,y1,y2);
+a1 = 1'b0;
+b1 = 1'b1;
+c1 = 1'b1;
+#1 $display("a1:%b,b1:%b,c1:%b,y1:%b,y2:%b,",a1,b1,c1,y1,y2);
+a1 = 1'b1;
+b1 = 1'b0;
+c1 = 1'b0;
+#1 $display("a1:%b,b1:%b,c1:%b,y1:%b,y2:%b,",a1,b1,c1,y1,y2);
+a1 = 1'b1;
+b1 = 1'b0;
+c1 = 1'b1;
+#1 $display("a1:%b,b1:%b,c1:%b,y1:%b,y2:%b,",a1,b1,c1,y1,y2);
+a1 = 1'b1;
+b1 = 1'b1;
+c1 = 1'b0;
+#1 $display("a1:%b,b1:%b,c1:%b,y1:%b,y2:%b,",a1,b1,c1,y1,y2);
+a1 = 1'b1;
+b1 = 1'b1;
+c1 = 1'b1;
+#1 $display("a1:%b,b1:%b,c1:%b,y1:%b,y2:%b,",a1,b1,c1,y1,y2);
+end
+endmodule
